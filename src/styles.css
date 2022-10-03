@@ -1,0 +1,15 @@
+.pointer {
+    cursor: pointer;
+}
+
+.input-error {
+    color: red;
+    font-size: 13px;
+    text-transform: uppercase;
+}
+
+.input-success {
+    color: green;
+    font-size: 13px;
+    text-transform: uppercase;
+}

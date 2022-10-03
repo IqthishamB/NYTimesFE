@@ -1,0 +1,52 @@
+<!-- News With Sidebar Start -->
+<div class="container-fluid py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- News Detail Start -->
+                <div class="position-relative mb-3">
+                    <img class="img-fluid w-100" src="{{this.dataService.Story.img_url}}" style="object-fit: cover;">
+                    <div class="overlay position-relative bg-light">
+                        <div class="mb-3">
+                            <a class="active">{{this.dataService.Story.byline}}</a>
+                            <span class="px-1">/</span>
+                            <span> {{this.dataService.Story.date}}</span>
+                        </div>
+                        <div>
+                            <h3 class="mb-3">{{this.dataService.Story.title}}</h3>
+                            <h4 class="mb-3">{{this.dataService.Story.abstract}}</h4>
+                            <p>{{this.dataService.Story.lead_paragraph}}</p>
+                            <h4 class="mb-3">Source : <a href="{{this.dataService.Story.web_url}}"
+                                    target="_blank">{{this.dataService.Story.source}}</a></h4>
+                        </div>
+                    </div>
+                </div>
+                <!-- News Detail End -->
+
+                <!-- Comment List Start -->
+                <div class="bg-light mb-3" style="padding: 30px;" *ngIf="commets!= null && commets.length > 0">
+                    <ng-container *ngFor="let comment of commets">
+                        <h3 class="mb-4">{{commets.count}} Comments</h3>
+                        <div class="media mb-4">
+                            <img src="{{comment.url}}" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
+                            <div class="media-body">
+                                <h6><a href="">{{comment.name}}</a> <small><i>{{comment.date}}</i></small></h6>
+                                <p>{{comment.desc}}</p>
+                                <button class="btn btn-sm btn-outline-secondary">Reply</button>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="bg-light mb-3" style="padding: 30px;" *ngIf="commets == null || commets.length == 0">
+                    <h3 class="mb-4"> 0 Comments</h3>
+                    <h3 class="input-error" *ngIf="this.responseModel != null && !this.responseModel.Status">
+                        {{this.responseModel.Message}}</h3>
+                </div>
+                <!-- Comment List End -->
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- News With Sidebar End -->

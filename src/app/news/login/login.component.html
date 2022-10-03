@@ -1,0 +1,37 @@
+<div class="container-fluid py-3">
+    <div class="container">
+        <div class="row">
+            <div class="offset-2 col-lg-8">
+                <div class="d-flex align-items-center justify-content-between bg-light py-2 px-4 mb-3">
+                    <h3 class="m-0">Login</h3>
+                </div>
+                <form [formGroup]="LoginFrom">
+                    <div class="row">
+                        <div class="col-lg-5 offset-3 mt-3">
+                            <input type="text" name="userid" id="userid" value="" autofocus placeholder="Username"
+                                formControlName="UserID" autocomplete="off" />
+                            <label class="input-error"
+                                *ngIf="LoginFrom.controls['UserID'].invalid && LoginFrom.controls['UserID'].touched">Please
+                                enter the valid User Name</label>
+                        </div>
+                        <div class="col-lg-5 offset-3 mt-3">
+                            <input type="password" name="password" id="password" value="" placeholder="Password"
+                                formControlName="Password" />
+                            <label class="input-error"
+                                *ngIf="LoginFrom.controls['Password'].invalid && LoginFrom.controls['Password'].touched">Please
+                                enter the Password</label>
+                        </div>
+                        <div class="col-lg-12 offset-4 mt-3">
+                            <input type="submit" value="Login" class="btn btn-outline-secondary text-center"
+                                (click)="signin()" [disabled]="!LoginFrom.valid" />
+                        </div>
+                        <div class="col-lg-12 offset-3 mt-3">
+                            <label class="input-error"
+                                *ngIf="this.responseModel != null && !this.responseModel.Status">{{this.responseModel.Message}}</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

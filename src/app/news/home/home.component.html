@@ -1,0 +1,100 @@
+<div class="container-fluid py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="row" *ngIf="stories!= null && stories.length > 0">
+                    <ng-container *ngFor="let story of stories  | paginate: { itemsPerPage: 10, currentPage: p }">
+                        <div class="col-lg-6" *ngIf="story.section != ''">
+                            <div class="d-flex mb-3">
+                                <img src="{{story.multimedia != null && story.multimedia[0].url}}"
+                                    style="width: 100px; height: 100px; object-fit: cover;">
+                                <div class="w-100 d-flex flex-column justify-content-center bg-light px-3"
+                                    style="height: 100px;">
+                                    <div class="mb-1" style="font-size: 13px;">
+                                        <a href="">{{story.section}}</a>
+                                        <span class="px-1">/</span>
+                                        <span>{{story.created_date}}</span>
+                                    </div>
+                                    <a class="h6 m-0 pointer" (click)="readmore(story)">{{story.title}}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                    <ng-container *ngFor="let story of searchstories | paginate: { itemsPerPage: 10, currentPage: p}">
+                        <div class="col-lg-6" *ngIf="story.section_name != ''">
+                            <div class="d-flex mb-3">
+                                <img src="{{story.web_url?.split('/')[0] + story.web_url?.split('/')[1] + story.web_url?.split('/')[2] + '/' + story.multimedia[0]?.url}}"
+                                    style="width: 100px; height: 100px; object-fit: cover;">
+                                <div class="w-100 d-flex flex-column justify-content-center bg-light px-3"
+                                    style="height: 100px;">
+                                    <div class="mb-1" style="font-size: 13px;">
+                                        <a href="">{{story.section_name}}</a>
+                                        <span class="px-1">/</span>
+                                        <span>{{story.pub_date}}</span>
+                                    </div>
+                                    <a class="h6 m-0 pointer" (click)="sreadmore(story)">{{story.headline.main}}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+
+                <div class="row">
+                    <label class="input-error"
+                        *ngIf="this.responseModel != null && !this.responseModel.Status">{{this.responseModel.Message}}</label>
+
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination justify-content-center">
+                                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="input-group ml-auto">
+                    <input type="text" class="form-control" [(ngModel)]="searchtext" placeholder="Keyword"
+                        (keyup.enter)="Search()">
+                    <div class="input-group-append">
+                        <button class="input-group-text text-secondary" (click)="Search()"><i
+                                class="fa fa-search"></i></button>
+                    </div>
+                </div>
+
+                <!-- Search History Start -->
+                <div class="pt-3" *ngIf="this.dataService.SearchHistory.length > 0">
+                    <div class="bg-light py-2 px-4 mb-3">
+                        <h3 class="m-0">Search History</h3>
+                    </div>
+                    <div class="d-flex flex-wrap m-n1 ">
+                        <a class="btn btn-sm btn-outline-secondary m-1"
+                            *ngFor="let history of this.dataService.SearchHistory"
+                            (click)="SearchHistory(history)">{{history}}</a>
+                    </div>
+                </div>
+                <!-- Search History End -->
+                <div class="d-flex align-items-center justify-content-between bg-light py-2 px-4 mb-3 mt-5">
+                    <h3 class="m-0">Categories</h3>
+                </div>
+                <div class="position-relative overflow-hidden mb-3" style="height: 80px;">
+                    <img class="img-fluid w-100 h-100" src="assets/img/cat-500x80-1.jpg" style="object-fit: cover;">
+                    <a (click)="story('world')"
+                        class="overlay pointer align-items-center justify-content-center h4 m-0 text-white text-decoration-none">
+                        World
+                    </a>
+                </div>
+                <div class="position-relative overflow-hidden mb-3" style="height: 80px;">
+                    <img class="img-fluid w-100 h-100" src="assets/img/cat-500x80-2.jpg" style="object-fit: cover;">
+                    <a (click)="story('science')"
+                        class="overlay pointer align-items-center justify-content-center h4 m-0 text-white text-decoration-none">
+                        Science
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
