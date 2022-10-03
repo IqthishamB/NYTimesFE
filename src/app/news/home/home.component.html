@@ -20,6 +20,8 @@
                             </div>
                         </div>
                     </ng-container>
+                </div>
+                <div class="row" *ngIf="searchstories!= null && searchstories.length > 0">
                     <ng-container *ngFor="let story of searchstories | paginate: { itemsPerPage: 10, currentPage: p}">
                         <div class="col-lg-6" *ngIf="story.section_name != ''">
                             <div class="d-flex mb-3">

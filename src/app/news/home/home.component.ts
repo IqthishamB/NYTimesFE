@@ -60,7 +60,6 @@ export class HomeComponent implements OnInit {
     this.Search();
   }
   Search() {
-    debugger
     this.texthistory();
     this.Services.searchnews(this.searchtext)
       .pipe(first())
